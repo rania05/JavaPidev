@@ -1,0 +1,95 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    
+  
+#tabpane {
+    -fx-tab-min-height: 5em;
+    /* 24 */
+    -fx-tab-max-height: 5em;
+    /* 24 */
+    -fx-background-color: #b30000;
+
+    -fx-tab-min-width: 0.5em;
+    -fx-tab-max-width: 0.5em;
+    -fx-padding: 0 -1 -1 0
+}
+.tab .tab-label {
+    -fx-background-color: transparent;
+    -fx-alignment: CENTER;
+    -fx-text-fill: #EBEAF0;
+
+}
+.tab{
+    -fx-pref-height: 80;
+
+    -fx-background-color: #ff4d4d;
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 0.0;
+    -fx-padding: 0 20 0 20;
+}
+
+.tab:selected
+{
+    -fx-background-color:  #b30000;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-border-width: 5 0 0 0;
+    -fx-border-color: #b30000;
+
+
+
+}
+
+.tab:focused
+{
+  -fx-focus-color: transparent;
+
+
+}
+
+.tab-pane *.tab-header-background
+{
+    -fx-background-color: transparent;
+}
+
+.tab-pane:left *.tab-header-area
+{
+    -fx-background-insets: 0, 0 0 10;
+    -fx-padding: 0.0em 0.0em 0.0em 0.0em;
+
+
+}
+
+.tab:selected .focus-indicator
+{
+    -fx-focus-color: transparent;
+    -fx-border-color: transparent;
+}
+.retour {
+    -fx-background-color:#16A0F8;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+.retour Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);
+}
+.retour:hover {
+    -fx-background-color:#1BBAE4;
+           
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight:bold;
+}
+}
+
+
+

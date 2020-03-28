@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="391.0" prefWidth="731.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.gestionRefug.Gui.FXMLModifierController">
+    <stylesheets>
+        <URL value="@fxmlmodifier.css" />
+    </stylesheets>
+   <children>
+      <Label fx:id="labelnom" layoutX="29.0" layoutY="43.0" prefHeight="17.0" prefWidth="39.0" text="Nom" />
+      <Label fx:id="labelpr" layoutX="29.0" layoutY="92.0" text="Prenom" />
+      <Label fx:id="labelage" layoutX="29.0" layoutY="142.0" prefHeight="17.0" prefWidth="48.0" text="Age" />
+      <Label fx:id="labelorg" layoutX="29.0" layoutY="196.0" text="Origine" />
+      <Label fx:id="labelcamp" layoutX="29.0" layoutY="255.0" text="Camp" />
+      <TextField fx:id="nomref" layoutX="115.0" layoutY="39.0" />
+      <TextField fx:id="prenomref" layoutX="115.0" layoutY="88.0" />
+      <TextField fx:id="ageref" layoutX="115.0" layoutY="138.0" />
+      <TextField fx:id="origineref" layoutX="115.0" layoutY="192.0" />
+      <TextField fx:id="campref" layoutX="115.0" layoutY="251.0" />
+      <Button fx:id="btnmodif" layoutX="138.0" layoutY="319.0" mnemonicParsing="false" onAction="#modref" text="modifier" />
+   </children>
+</AnchorPane>

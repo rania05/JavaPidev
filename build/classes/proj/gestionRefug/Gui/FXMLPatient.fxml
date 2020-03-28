@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="466.0" prefWidth="661.0" stylesheets="@fxmlpatient.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.gestionRefug.Gui.FXMLPatientController">
+   <children>
+      <AnchorPane layoutY="5.0" prefHeight="489.0" prefWidth="778.0">
+         <children>
+            <TabPane prefHeight="489.0" prefWidth="778.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="Consultations">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="labRefugie" layoutX="14.0" layoutY="82.0" prefHeight="25.0" prefWidth="72.0" text="Refugié">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="LabSujet" layoutX="14.0" layoutY="133.0" text="Sujet">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="LabContenu" layoutX="14.0" layoutY="180.0" prefHeight="25.0" prefWidth="69.0" text="Contenu">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labDuree" layoutX="14.0" layoutY="379.0" text="Durée">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="sujet" layoutX="106.0" layoutY="133.0" />
+                              <TableView fx:id="tabRef" layoutX="311.0" layoutY="32.0" onMouseClicked="#modtabref" prefHeight="296.0" prefWidth="373.0">
+                                 <columns>
+                                    <TableColumn fx:id="ref" prefWidth="75.0" text="Réfugié" />
+                                    <TableColumn fx:id="sujetConslt" prefWidth="75.0" text="Sujet" />
+                                    <TableColumn fx:id="contenuConslt" prefWidth="75.0" text="Contenu" />
+                                    <TableColumn fx:id="dateConslt" prefWidth="75.0" text="date" />
+                                    <TableColumn fx:id="dureeConslt" prefWidth="75.0" text="durée" />
+                                 </columns>
+                              </TableView>
+                              <Button fx:id="actualiserConsult" layoutX="373.0" layoutY="346.0" mnemonicParsing="false" onAction="#ConsultAfficher" text="Actualiser" />
+                              <Button fx:id="modConsult" layoutX="455.0" layoutY="346.0" mnemonicParsing="false" onAction="#modifierConst" text="Modifier" />
+                              <Button fx:id="suppConsult" layoutX="533.0" layoutY="346.0" mnemonicParsing="false" onAction="#ConsultSupprimer" text="Supprimer" />
+                              <JFXTimePicker fx:id="duree" defaultColor="BLACK" layoutX="95.0" layoutY="379.0" />
+                              <TextArea fx:id="contenu" layoutX="86.0" layoutY="180.0" prefHeight="145.0" prefWidth="216.0" />
+                              <ComboBox fx:id="listeRefugie" layoutX="106.0" layoutY="82.0" prefWidth="150.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Camps &amp; Refugiés">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="btAjout1" layoutX="126.0" layoutY="371.0" mnemonicParsing="false" onAction="#RefAjout" text="Ajouter" />
+                              <Label fx:id="labNom" layoutX="14.0" layoutY="82.0" prefHeight="25.0" prefWidth="72.0" text="Nom">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="LabPrenom" layoutX="14.0" layoutY="133.0" text="Prenom">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="LabAge" layoutX="14.0" layoutY="180.0" prefHeight="25.0" prefWidth="69.0" text="Age">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lborigine" layoutX="14.0" layoutY="231.0" text="Origine">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="prenom" layoutX="106.0" layoutY="133.0" />
+                              <TextField fx:id="age" layoutX="106.0" layoutY="180.0" />
+                              <TableView fx:id="tabRef1" layoutX="311.0" layoutY="32.0" onMouseClicked="#modifAff" prefHeight="296.0" prefWidth="373.0">
+                                 <columns>
+                                    <TableColumn fx:id="nomref" prefWidth="75.0" text="Nom" />
+                                    <TableColumn fx:id="prenomref" prefWidth="75.0" text="Prenom" />
+                                    <TableColumn fx:id="ageref" prefWidth="75.0" text="Age" />
+                                    <TableColumn fx:id="origineref" prefWidth="75.0" text="Origine" />
+                                    <TableColumn fx:id="campref" prefWidth="75.0" text="Camp" />
+                                 </columns>
+                              </TableView>
+                              <Button fx:id="actualiserRef" layoutX="373.0" layoutY="346.0" mnemonicParsing="false" onAction="#refAffiche" text="Actualiser" />
+                              <Button fx:id="modRef" layoutX="455.0" layoutY="346.0" mnemonicParsing="false" onAction="#modifiRef" text="Modifier" />
+                              <Button fx:id="suppRef" layoutX="533.0" layoutY="346.0" mnemonicParsing="false" onAction="#RefSupp" text="Supprimer" />
+                              <TextField fx:id="nom" layoutX="106.0" layoutY="82.0" />
+                              <TextField fx:id="origine" layoutX="107.0" layoutY="232.0" />
+                              <Label fx:id="lbcamp" layoutX="20.0" layoutY="285.0" text="Camp">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="listeCamp" layoutX="107.0" layoutY="285.0" prefWidth="150.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Dons &amp; evenements">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="202.0" layoutY="172.0" text="Label" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
