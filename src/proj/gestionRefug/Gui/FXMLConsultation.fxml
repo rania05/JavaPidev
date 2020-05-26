@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -15,29 +17,29 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="489.0" prefWidth="775.0" styleClass="bodydoctor" stylesheets="@../../../Ressources/styleBackground.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.gestionRefug.Gui.FXMLConsultationController">
+<AnchorPane prefHeight="499.0" prefWidth="975.0" styleClass="bodydoctor" stylesheets="@../../../Ressources/styleBackground.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.gestionRefug.Gui.FXMLConsultationController">
 
      <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <Button fx:id="btAjout" layoutX="126.0" layoutY="432.0" mnemonicParsing="false" onAction="#ajoutConsult" text="Ajouter" />
-      <Label fx:id="labrefugie" layoutX="15.0" layoutY="116.0" prefHeight="25.0" prefWidth="68.0" text="Refugié" textFill="RED">
+      <Button fx:id="btAjout" layoutX="168.0" layoutY="445.0" mnemonicParsing="false" onAction="#ajoutConsult" text="Ajouter" />
+      <Label fx:id="labrefugie" layoutX="12.0" layoutY="137.0" prefHeight="25.0" prefWidth="68.0" text="Refugié" textFill="RED">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font></Label>
-      <Label fx:id="labsujet" layoutX="18.0" layoutY="159.0" text="Sujet" textFill="RED">
+      <Label fx:id="labsujet" layoutX="12.0" layoutY="184.0" text="Sujet" textFill="RED">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font></Label>
-      <Label fx:id="labcontenu" layoutX="12.0" layoutY="231.0" prefHeight="25.0" prefWidth="75.0" text="Contenu" textFill="RED">
+      <Label fx:id="labcontenu" layoutX="18.0" layoutY="250.0" prefHeight="25.0" prefWidth="75.0" text="Contenu" textFill="RED">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font></Label>
-      <Label fx:id="labduree" layoutX="27.0" layoutY="379.0" text="Durée" textFill="RED">
+      <Label fx:id="labduree" layoutX="27.0" layoutY="404.0" text="Durée" textFill="RED">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font></Label>
-      <TextField fx:id="sujet" layoutX="89.0" layoutY="159.0" />
-      <TableView fx:id="tabRef" layoutX="383.0" layoutY="97.0" onMouseClicked="#modCon" prefHeight="296.0" prefWidth="373.0">
+      <TextField fx:id="sujet" layoutX="86.0" layoutY="184.0" />
+      <TableView fx:id="tabRef" layoutX="576.0" layoutY="110.0" onMouseClicked="#modCon" prefHeight="315.0" prefWidth="373.0">
         <columns>
           <TableColumn fx:id="colref" prefWidth="75.0" text="Refugie" />
           <TableColumn fx:id="colsujet" prefWidth="75.0" text="Sujet" />
@@ -46,55 +48,63 @@
             <TableColumn fx:id="colduree" prefWidth="75.0" text="Durée" />
         </columns>
       </TableView>
-      <Button fx:id="actualiserRef" layoutX="510.0" layoutY="407.0" mnemonicParsing="false" onAction="#afficheConslt" text="Actualiser" />
-      <Button fx:id="modRef" layoutX="595.0" layoutY="407.0" mnemonicParsing="false" onAction="#modifConsult" text="Modifier" />
-      <Button fx:id="suppRef" layoutX="673.0" layoutY="407.0" mnemonicParsing="false" onAction="#suppConsult" text="Supprimer" />
-      <HBox prefHeight="66.0" prefWidth="778.0" style="-fx-background-color: #d9d9d9;">
+      <Button fx:id="actualiserRef" layoutX="647.0" layoutY="445.0" mnemonicParsing="false" onAction="#afficheConslt" text="Actualiser" />
+      <Button fx:id="modRef" layoutX="746.0" layoutY="445.0" mnemonicParsing="false" onAction="#modifConsult" text="Modifier" />
+      <Button fx:id="suppRef" layoutX="836.0" layoutY="445.0" mnemonicParsing="false" onAction="#suppConsult" text="Supprimer" />
+      <HBox prefHeight="66.0" prefWidth="975.0" style="-fx-background-color: #d9d9d9;">
          <children>
-            <ButtonBar prefHeight="66.0" prefWidth="73.0">
+            <ButtonBar prefHeight="66.0" prefWidth="214.0">
                <buttons>
-                  <Label text="Maddox" textFill="#cd0000">
+                  <Label prefHeight="53.0" prefWidth="145.0" text="Maddox" textFill="#cd0000">
                      <font>
-                        <Font name="System Bold Italic" size="16.0" />
+                        <Font name="System Bold Italic" size="24.0" />
                      </font>
                   </Label>
                </buttons>
             </ButtonBar>
-            <JFXButton prefHeight="66.0" prefWidth="118.0" text="Accueil">
-               <graphic>
-                  <FontAwesomeIcon iconName="HOME" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="btnrefugiego" onAction="#refugiego" prefHeight="66.0" prefWidth="141.0" text="Camps et Refugies">
+            <JFXButton fx:id="btnrefugiego" onAction="#refugiego" prefHeight="66.0" prefWidth="119.0" text=" Refugies">
                <graphic>
                   <FontAwesomeIcon iconName="MALE" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnConsultation" onAction="#consultationgo" prefHeight="66.0" prefWidth="109.0" text="Consultation">
+            <JFXButton fx:id="btnConsultation" onAction="#consultationgo" prefHeight="66.0" prefWidth="145.0" text="Consultation">
                <graphic>
                   <FontAwesomeIcon glyphStyleClass="" iconName="PASTE" />
                </graphic>
             </JFXButton>
-            <JFXButton prefHeight="66.0" prefWidth="129.0" text="Dons">
+            <JFXButton onAction="#dongo" prefHeight="112.0" prefWidth="180.0" text="Camp et besoins">
                <graphic>
-                  <FontAwesomeIcon iconName="MONEY" />
+                  <FontAwesomeIcon iconName="ADN" wrappingWidth="10.857142448425293" />
                </graphic>
             </JFXButton>
-            <JFXButton prefHeight="66.0" prefWidth="110.0" text="Evenements">
+            <JFXButton onAction="#CasSociale" prefHeight="66.0" prefWidth="127.0" text="Cas Sociale">
                <graphic>
-                  <FontAwesomeIcon iconName="CALENDAR" />
+                  <FontAwesomeIcon iconName="HOME" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="Event" onAction="#EventAction" prefHeight="66.0" prefWidth="120.0" text="Evenement">
+               <graphic>
+                  <FontAwesomeIcon iconName="MALE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#logoutAction" prefHeight="86.0" prefWidth="153.0" text="se déconnecter">
+               <graphic>
+                  <FontAwesomeIcon iconName="HEART" />
                </graphic>
             </JFXButton>
          </children>
       </HBox>
-      <ButtonBar layoutX="715.0" prefHeight="66.0" prefWidth="61.0">
+      <ButtonBar layoutX="715.0" prefHeight="499.0" prefWidth="0.0">
          <buttons>
             
          </buttons>
       </ButtonBar>
-      <JFXTimePicker fx:id="duree" layoutX="96.0" layoutY="379.0" />
-      <TextArea fx:id="contenu" layoutX="89.0" layoutY="207.0" prefHeight="145.0" prefWidth="272.0" />
-      <ComboBox fx:id="listeRefugie" layoutX="89.0" layoutY="116.0" prefWidth="150.0" />
+      <JFXTimePicker fx:id="duree" layoutX="93.0" layoutY="404.0" />
+      <TextArea fx:id="contenu" layoutX="87.0" layoutY="231.0" prefHeight="145.0" prefWidth="272.0" />
+      <ComboBox fx:id="listeRefugie" layoutX="86.0" layoutY="137.0" prefWidth="150.0" />
+      <FontAwesomeIcon fill="#e40000" iconName="SEARCH" layoutX="920.0" layoutY="100.0" />
+      <JFXTextField fx:id="zoneRechC" layoutX="576.0" layoutY="77.0" onKeyTyped="#rechercherC" prefHeight="25.0" prefWidth="332.0" />
+      <Pagination fx:id="pagination" layoutX="581.0" layoutY="119.0" prefHeight="306.0" prefWidth="373.0" />
     </children>
     
     

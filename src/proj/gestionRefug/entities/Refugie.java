@@ -22,6 +22,8 @@ private String nomCamp;
         return nomCamp;
     }
 
+    
+    
     public void setNomCamp(String nomCamp) {
         this.nomCamp = nomCamp;
     }

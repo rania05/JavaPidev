@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="bloquer" prefHeight="580.0" prefWidth="1059.0" style="-fx-border-color: NAVY;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UtilisateurController">
+   <children>
+      <Button fx:id="retour" layoutX="919.0" layoutY="100.0" mnemonicParsing="false" onAction="#directAccueil" prefHeight="20.0" prefWidth="79.0" style="-fx-background-color: #00ff91;" text="Retour" />
+      <Button fx:id="vider" layoutX="45.0" layoutY="518.0" mnemonicParsing="false" onAction="#vider" style="-fx-background-color: #00ff91;" text="Vider" />
+      <TextField fx:id="recherche" layoutX="611.0" layoutY="100.0" onAction="#recher" promptText="Barre de recherche" />
+      <Label layoutX="489.0" layoutY="105.0" text="Rechercher :" />
+      <TableView fx:id="table" layoutX="504.0" layoutY="156.0" prefHeight="400.0" prefWidth="587.0" style="-fx-border-color: NAVY;">
+         <columns>
+            <TableColumn fx:id="clNom" prefWidth="130.0" text="Nom" />
+            <TableColumn fx:id="clPrenom" prefWidth="267.0" text="Prenom" />
+            <TableColumn fx:id="clEmail" minWidth="0.0" prefWidth="188.0" text="Email" />
+         </columns>
+      </TableView>
+      <AnchorPane layoutX="12.0" layoutY="9.0" prefHeight="454.0" prefWidth="344.0">
+         <children>
+            <TextField fx:id="txtnom" layoutX="142.0" layoutY="196.0" promptText="Nom" />
+            <TextField fx:id="txtprenom" layoutX="142.0" layoutY="268.0" promptText="Prenom" />
+            <Text fx:id="nomm" layoutX="11.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :" />
+            <Text fx:id="prenom" layoutX="26.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :" />
+            <TextField fx:id="txtemail" layoutX="142.0" layoutY="325.0" promptText="Email" />
+            <Text layoutX="18.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier Utilisateur">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Separator layoutY="132.0" prefHeight="4.0" prefWidth="344.0" style="-fx-background-color: NAVY;" />
+            <Text layoutX="25.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :" />
+            <Text layoutX="31.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe" />
+            <TextField fx:id="txtroles" layoutX="142.0" layoutY="391.0" promptText="Mot de passe" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="btn" layoutX="148.0" layoutY="518.0" mnemonicParsing="false" onAction="#validerModif" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #00ff91;" text="Modifier" />
+      <Button fx:id="supprimer" layoutX="268.0" layoutY="518.0" mnemonicParsing="false" onAction="#validersupp" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #00ff91;" text="Supprimer" />
+      <ImageView fx:id="imgv" fitHeight="124.0" fitWidth="138.0" layoutX="338.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="217.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/edit-not-validated-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="348.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/empty_recycle_bin_by_brightknight.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="975.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/arrow-back-512.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="bloc" layoutX="393.0" layoutY="518.0" mnemonicParsing="false" onAction="#validerBloc" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #00ff91;" text="bloquer" />
+      <HBox layoutX="-2.0" layoutY="-2.0" prefHeight="80.0" prefWidth="1142.0" style="-fx-background-color: #d9d9d9;">
+         <children>
+            <ButtonBar prefHeight="112.0" prefWidth="249.0">
+               <buttons>
+                  <Label contentDisplay="CENTER" prefHeight="47.0" prefWidth="224.0" text="Maddox" textFill="#d30707">
+                     <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                     </font>
+                  </Label>
+               </buttons>
+            </ButtonBar>
+            <JFXButton fx:id="btnrefgo" onAction="#refugiego" prefHeight="79.0" prefWidth="145.0" text=" Refugies">
+               <graphic>
+                  <FontAwesomeIcon iconName="MALE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnConsultation" onAction="#consultationgo" prefHeight="118.0" prefWidth="138.0" text="Consultation">
+               <graphic>
+                  <FontAwesomeIcon glyphStyleClass="" iconName="PASTE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#InterfaceCamp" prefHeight="112.0" prefWidth="180.0" text="Camp et besoins">
+               <graphic>
+                  <FontAwesomeIcon iconName="ADN" wrappingWidth="10.857142448425293" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#CasSociale" prefHeight="86.0" prefWidth="153.0" text="Cas Sociale">
+               <graphic>
+                  <FontAwesomeIcon iconName="HOME" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+      
+   </children>
+</AnchorPane>

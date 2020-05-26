@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,35 +15,35 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="775.0" styleClass="bodybg" stylesheets="@../../../Ressources/styleBackground.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.gestionRefug.Gui.FXMLRefugieController">
+<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="975.0" styleClass="bodybg" stylesheets="@../../../Ressources/styleBackground.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.gestionRefug.Gui.FXMLRefugieController">
     
     <children>
-      <Button fx:id="btAjout" layoutX="126.0" layoutY="407.0" mnemonicParsing="false" onAction="#RefAjout" text="Ajouter" />
-      <Label fx:id="labNom" layoutX="27.0" layoutY="140.0" prefHeight="17.0" prefWidth="55.0" text="Nom" textFill="RED">
+      <Button fx:id="btAjout" layoutX="147.0" layoutY="452.0" mnemonicParsing="false" onAction="#RefAjout" text="Ajouter" />
+      <Label fx:id="labNom" layoutX="30.0" layoutY="144.0" prefHeight="17.0" prefWidth="55.0" text="Nom" textFill="RED">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font></Label>
-      <Label fx:id="LabPrenom" layoutX="26.0" layoutY="191.0" text="Prenom" textFill="RED">
+      <Label fx:id="LabPrenom" layoutX="28.0" layoutY="200.0" text="Prenom" textFill="RED">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font></Label>
-      <Label fx:id="LabAge" layoutX="29.0" layoutY="242.0" prefHeight="17.0" prefWidth="42.0" text="Age" textFill="RED">
+      <Label fx:id="LabAge" layoutX="37.0" layoutY="256.0" prefHeight="17.0" prefWidth="42.0" text="Age" textFill="RED">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font></Label>
-      <Label fx:id="lborigine" layoutX="27.0" layoutY="293.0" text="Origine" textFill="RED">
+      <Label fx:id="lborigine" layoutX="30.0" layoutY="308.0" text="Origine" textFill="RED">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font></Label>
-      <TextField fx:id="nom" layoutX="89.0" layoutY="141.0" />
-      <TextField fx:id="prenom" layoutX="89.0" layoutY="192.0" />
-      <TextField fx:id="age" layoutX="89.0" layoutY="243.0" />
-      <TextField fx:id="origine" layoutX="89.0" layoutY="295.0" />
-      <Label fx:id="lbcamp" layoutX="27.0" layoutY="346.0" text="Camp" textFill="RED">
+      <TextField fx:id="nom" layoutX="98.0" layoutY="144.0" />
+      <TextField fx:id="prenom" layoutX="100.0" layoutY="200.0" />
+      <TextField fx:id="age" layoutX="100.0" layoutY="254.0" />
+      <TextField fx:id="origine" layoutX="102.0" layoutY="308.0" />
+      <Label fx:id="lbcamp" layoutX="37.0" layoutY="362.0" text="Camp" textFill="RED">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font></Label>
-      <TableView fx:id="tabRef" layoutX="398.0" layoutY="95.0" onMouseClicked="#modifAff" prefHeight="296.0" prefWidth="373.0">
+      <TableView fx:id="tabRef" layoutX="531.0" layoutY="106.0" onMouseClicked="#modifAff" prefHeight="326.0" prefWidth="382.0">
         <columns>
           <TableColumn fx:id="nomref" prefWidth="75.0" text="Nom" />
           <TableColumn fx:id="prenomref" prefWidth="75.0" text="Prenom" />
@@ -50,10 +52,10 @@
             <TableColumn fx:id="campref" prefWidth="75.0" text="Camp" />
         </columns>
       </TableView>
-      <Button fx:id="actualiserRef" layoutX="510.0" layoutY="407.0" mnemonicParsing="false" onAction="#refAffiche" text="Actualiser" />
-      <Button fx:id="btnmodRef" layoutX="595.0" layoutY="407.0" mnemonicParsing="false" onAction="#modifiRef" text="Modifier" />
-      <Button fx:id="suppRef" layoutX="673.0" layoutY="407.0" mnemonicParsing="false" onAction="#RefSupp" text="Supprimer" />
-      <HBox prefHeight="66.0" prefWidth="778.0" style="-fx-background-color: #d9d9d9;">
+      <Button fx:id="actualiserRef" layoutX="601.0" layoutY="452.0" mnemonicParsing="false" onAction="#refAffiche" text="Actualiser" />
+      <Button fx:id="btnmodRef" layoutX="703.0" layoutY="452.0" mnemonicParsing="false" onAction="#modifiRef" text="Modifier" />
+      <Button fx:id="suppRef" layoutX="795.0" layoutY="452.0" mnemonicParsing="false" onAction="#RefSupp" text="Supprimer" />
+      <HBox prefHeight="66.0" prefWidth="975.0" style="-fx-background-color: #d9d9d9;">
          <children>
             <ButtonBar prefHeight="66.0" prefWidth="73.0">
                <buttons>
@@ -64,29 +66,34 @@
                   </Label>
                </buttons>
             </ButtonBar>
-            <JFXButton prefHeight="66.0" prefWidth="118.0" text="Accueil">
-               <graphic>
-                  <FontAwesomeIcon iconName="HOME" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="btnrefgo" onAction="#refugiego" prefHeight="66.0" prefWidth="141.0" text="Camps et Refugies">
+            <JFXButton fx:id="btnrefgo" onAction="#refugiego" prefHeight="66.0" prefWidth="141.0" text=" Refugies">
                <graphic>
                   <FontAwesomeIcon iconName="MALE" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnConsultation" onAction="#consultationgo" prefHeight="66.0" prefWidth="109.0" text="Consultation">
+            <JFXButton fx:id="btnConsultation" onAction="#consultationgo" prefHeight="66.0" prefWidth="138.0" text="Consultation">
                <graphic>
                   <FontAwesomeIcon glyphStyleClass="" iconName="PASTE" />
                </graphic>
             </JFXButton>
-            <JFXButton prefHeight="66.0" prefWidth="129.0" text="Dons">
+            <JFXButton onAction="#dongo" prefHeight="66.0" prefWidth="163.0" text="Camp et besoins">
                <graphic>
-                  <FontAwesomeIcon iconName="MONEY" />
+                  <FontAwesomeIcon iconName="ADN" wrappingWidth="10.857142448425293" />
                </graphic>
             </JFXButton>
-            <JFXButton prefHeight="66.0" prefWidth="110.0" text="Evenements">
+            <JFXButton onAction="#CasSociale" prefHeight="86.0" prefWidth="153.0" text="Cas Sociale">
                <graphic>
-                  <FontAwesomeIcon iconName="CALENDAR" />
+                  <FontAwesomeIcon iconName="HOME" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="Event" onAction="#EventAction" prefHeight="147.0" prefWidth="145.0" text="Event">
+               <graphic>
+                  <FontAwesomeIcon iconName="MALE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#logoutAction" prefHeight="86.0" prefWidth="153.0" text="se déconnecter">
+               <graphic>
+                  <FontAwesomeIcon iconName="HEART" />
                </graphic>
             </JFXButton>
          </children>
@@ -96,7 +103,11 @@
             
          </buttons>
       </ButtonBar>
-      <ComboBox fx:id="listeCamp" layoutX="89.0" layoutY="346.0" prefWidth="150.0" />
+      <ComboBox fx:id="listeCamp" layoutX="103.0" layoutY="362.0" prefWidth="150.0" />
+      <JFXTextField fx:id="zoneRech" focusColor="#d30000" layoutX="533.0" layoutY="66.0" onKeyTyped="#rechercher" prefHeight="32.0" prefWidth="338.0" unFocusColor="#e80000" />
+      <FontAwesomeIcon fill="#e80000" iconName="SEARCH" layoutX="879.0" layoutY="96.0" />
+      <Pagination fx:id="Pagination" layoutX="533.0" layoutY="115.0" prefHeight="307.0" prefWidth="390.0" />
+      <Button fx:id="btnstat" layoutX="488.0" layoutY="452.0" mnemonicParsing="false" onAction="#voirStat" text="Statistique" />
     </children>
     
     

@@ -17,7 +17,7 @@ public class MyConnection {
 
     private static MyConnection instance;
 
-    private String url = "jdbc:mysql://localhost:3306/maddoxf";
+    private String url = "jdbc:mysql://localhost:3306/maddox";
     private String login = "root";
     private String mdp = "";
     private Connection cnx;

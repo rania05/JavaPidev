@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/Projet/src/proj/gestionRefug/services/ConsultationService.java</file>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/Projet/src/proj/gestionRefug/entities/RefConsult.java</file>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/Projet/src/proj/gestionRefug/entities/Refugie.java</file>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/Projet/src/proj/gestionRefug/Gui/FXMLConsultationController.java</file>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/Projet/src/proj/gestionRefug/Gui/FXMLRefugieController.java</file>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/Projet/src/proj/gestionRefug/services/RefugieService.java</file>
-            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/Projet/src/proj/gestionRefug/Gui/FXMLPatientController.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

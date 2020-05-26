@@ -6,11 +6,23 @@
 package proj.gestionRefug.Gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+import com.nexmo.client.NexmoClient;
+import com.nexmo.client.NexmoClientException;
+import com.nexmo.client.sms.MessageStatus;
+import com.nexmo.client.sms.SmsSubmissionResponse;
+import com.nexmo.client.sms.messages.TextMessage;
+import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,10 +39,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -38,6 +53,7 @@ import javax.swing.JOptionPane;
 import org.controlsfx.control.Notifications;
 import proj.gestionRefug.entities.Refugie;
 import proj.gestionRefug.services.RefugieService;
+import proj.gestionRefug.utils.MyConnection;
 
 /**
  * FXML Controller class
@@ -71,9 +87,7 @@ public class FXMLRefugieController implements Initializable {
     @FXML
     private Label lbcamp;
     @FXML
-    private ChoiceBox<?> camp;
-    @FXML
-    private TableView<?> tabRef;
+    private TableView<Refugie> tabRef;
     @FXML
     private TableColumn<?, ?> nomref;
     @FXML
@@ -96,6 +110,16 @@ public class FXMLRefugieController implements Initializable {
     private Button btnmodRef;
     @FXML
     private ComboBox<String> listeCamp;
+    @FXML
+    private JFXTextField zoneRech;
+    @FXML
+    private Pagination Pagination;
+    int from = 0, to = 0;
+    int itemPerPage = 5;
+    @FXML
+    private Button btnstat;
+    @FXML
+    private JFXButton Event;
 
     /**
      * Initializes the controller class.
@@ -116,6 +140,32 @@ public class FXMLRefugieController implements Initializable {
                 ObservableList campss = FXCollections.observableArrayList(listeC);
 listeCamp.setValue("liste camps");
 listeCamp.setItems(campss);
+
+int count = 0;
+        String req = "SELECT count(*) FROM Refugie";
+        try {
+
+            try (Statement pst1 = MyConnection.getInstance().getCnx().createStatement()) {
+                ResultSet rs1 = pst1.executeQuery(req);
+                rs1.first();
+                count = rs1.getInt(1);
+                rs1.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+      nomref.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prenomref.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        ageref.setCellValueFactory(new PropertyValueFactory<>("age"));
+        origineref.setCellValueFactory(new PropertyValueFactory<>("origine"));
+        campref.setCellValueFactory(new PropertyValueFactory<>("nomCamp"));
+       
+
+        int pageCount = (count / itemPerPage) + 1;
+        Pagination.setPageCount(pageCount);
+        Pagination.setPageFactory(this::createPage);
+
         
     }    
        
@@ -153,7 +203,14 @@ listeCamp.setItems(campss);
             alert1.setHeaderText(null);
             alert1.setContentText("Veuillez verifier l'age ");
             alert1.showAndWait();
-         } 
+         }  else if(!origine.getText().matches("^[a-zA-Z\\s]*$") )
+         {
+              Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Valider votre origine");
+            alert1.setHeaderText(null);
+            alert1.setContentText("Le champ origine accepte que les lettres ");
+            alert1.showAndWait();
+         }
     else{ Refugie refugie=new Refugie(
             nom.getText(),
             prenom.getText(),
@@ -177,8 +234,32 @@ listeCamp.setItems(campss);
                 });
     notif.showConfirm();
     }
-    refAffiche(event);
-   clearRef();     
+  
+    
+int count = 0;
+        String req = "SELECT count(*) FROM Refugie";
+        try {
+
+            try (Statement pst1 = MyConnection.getInstance().getCnx().createStatement()) {
+                ResultSet rs1 = pst1.executeQuery(req);
+                rs1.first();
+                count = rs1.getInt(1);
+                rs1.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+      nomref.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prenomref.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        ageref.setCellValueFactory(new PropertyValueFactory<>("age"));
+        origineref.setCellValueFactory(new PropertyValueFactory<>("origine"));
+        campref.setCellValueFactory(new PropertyValueFactory<>("nomCamp"));
+        int pageCount = (count / itemPerPage) + 1;
+        Pagination.setPageCount(pageCount);
+        Pagination.setPageFactory(this::createPage); 
+   clearRef();
+   
     }
 
     @FXML
@@ -235,14 +316,11 @@ listeCamp.setItems(campss);
 
     @FXML
     private void consultationgo(ActionEvent event) throws IOException  {
-         ((Node)(event.getSource())).getScene().getWindow().hide();
-        Parent parent = FXMLLoader.load(getClass().getResource("/proj/gestionRefug/Gui/FXMLConsultation.fxml"));
-        Stage stage = new Stage ();
-        Scene scene = new Scene (parent);
-        stage.setScene(scene);
-        stage.setTitle("main");
-        stage.show();
-        
+          Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Désolé");
+            alert1.setHeaderText(null);
+            alert1.setContentText("Vous n'avez pas accèes ");
+            alert1.showAndWait();
         
     }
 
@@ -323,11 +401,172 @@ listeCamp.setItems(campss);
               origine.getText(),
               b1.getIdCamps(listeCamp.getValue())
       );}
-    refAffiche(event);
-   clearRef();
+    
+int count = 0;
+        String req = "SELECT count(*) FROM Refugie";
+        try {
+
+            try (Statement pst1 = MyConnection.getInstance().getCnx().createStatement()) {
+                ResultSet rs1 = pst1.executeQuery(req);
+                rs1.first();
+                count = rs1.getInt(1);
+                rs1.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+      nomref.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prenomref.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        ageref.setCellValueFactory(new PropertyValueFactory<>("age"));
+        origineref.setCellValueFactory(new PropertyValueFactory<>("origine"));
+        campref.setCellValueFactory(new PropertyValueFactory<>("nomCamp"));
+        int pageCount = (count / itemPerPage) + 1;
+        Pagination.setPageCount(pageCount);
+        Pagination.setPageFactory(this::createPage); 
+
         
     }
     
+private void refreshB() throws SQLException{
+        List<Refugie> listB=new ArrayList<>();
+        RefugieService   cr = new RefugieService();
+        listB = cr.afficherRefugie();
+        ObservableList <Refugie> data = FXCollections.observableArrayList(listB);
+        tabRef.setItems(data);
+    }
+    
+    @FXML
+    private void rechercher(KeyEvent event) {
+            RefugieService RefugieService = new RefugieService();
+        zoneRech.setOnKeyReleased((KeyEvent e)
+                -> {
+            if (zoneRech.getText().equals("") ) {
+
+                try {
+                    refreshB();
+                } catch (SQLException ex) {
+                    Logger.getLogger(RefugieService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+
+            } else {
+
+                try {
+       nomref.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prenomref.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        ageref.setCellValueFactory(new PropertyValueFactory<>("age"));
+        origineref.setCellValueFactory(new PropertyValueFactory<>("origine"));
+        campref.setCellValueFactory(new PropertyValueFactory<>("nomCamp")); 
+
+                    tabRef.getItems().clear();
+
+                    tabRef.setItems(RefugieService.rechercheRefugie(zoneRech.getText()));
+
+                } catch (SQLException ex) {
+                Logger.getLogger(RefugieService.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
+            }
+        }
+        );
+    }
+    public ObservableList<Refugie> getTableData() {
+        ObservableList<Refugie> data = FXCollections.observableArrayList();
+        try {
+            String req = "Select r.nom,r.prenom,r.age,r.origine,c.id,c.nom from refugie r INNER JOIN camp c on r.idcamp = c.id limit "+ from + "," + to;
+            try (Statement pst = MyConnection.getInstance().getCnx().createStatement()) {
+             ResultSet rs = pst.executeQuery(req);
+                while (rs.next()) {
+                  Refugie r = new Refugie(
+                        
+                      rs.getString(1),
+                      rs.getString(2),
+                      rs.getInt(3),
+                      rs.getString(4),
+                      rs.getInt(5));
+                      r.setNomCamp(rs.getString(6));
+                  data.add(r);
+                    
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    private Node createPage(int pageIndex) {
+        from = pageIndex * itemPerPage;
+        to = itemPerPage;
+        tabRef.setItems(FXCollections.observableArrayList(getTableData()));
+        return tabRef;
+    }
+
+  @FXML
+    private void dongo(ActionEvent event) throws IOException {
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+        Parent parent = FXMLLoader.load(getClass().getResource("/proj/gestionCamp/GUI/AddCamp.fxml"));
+        Stage stage = new Stage ();
+        Scene scene = new Scene (parent);
+        stage.setScene(scene);
+        stage.setTitle("main");
+        stage.show();
+    }
+
+    @FXML
+    private void voirStat(ActionEvent event) throws IOException {
+                Scene scene;
+            Stage stage = new Stage();
+         
+                
+                scene = new Scene(FXMLLoader.load(getClass().getResource("/proj/gestionRefug/Gui/FXMLStat.fxml")));
+                 stage.setScene(scene);
+            stage.show();
+            
+    }
+
+    private void Compte(ActionEvent event) throws IOException {
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+        Parent parent = FXMLLoader.load(getClass().getResource("/proj/gestionUser/GUI/utilisateur.fxml"));
+        Stage stage = new Stage ();
+        Scene scene = new Scene (parent);
+        stage.setScene(scene);
+        stage.setTitle("main");
+        stage.show();
+        
+    }
+
+    @FXML
+    private void CasSociale(ActionEvent event) throws IOException {
+       Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Désolé");
+            alert1.setHeaderText(null);
+            alert1.setContentText("Vous n'avez pas accèes ");
+            alert1.showAndWait();
+        
+    }
+
+    @FXML
+    private void logoutAction(ActionEvent event) throws IOException {
+          ((Node)(event.getSource())).getScene().getWindow().hide();
+        Parent parent = FXMLLoader.load(getClass().getResource("/proj/gestionUser/GUI/Login.fxml"));
+        Stage stage = new Stage ();
+        Scene scene = new Scene (parent);
+        stage.setScene(scene);
+        stage.setTitle("main");
+        stage.show();
+       
+    }
+
+    @FXML
+    private void EventAction(ActionEvent event) {
+         Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Désolé");
+            alert1.setHeaderText(null);
+            alert1.setContentText("Vous n'avez pas accèes ");
+            alert1.showAndWait();
+    }
+
   
     
     

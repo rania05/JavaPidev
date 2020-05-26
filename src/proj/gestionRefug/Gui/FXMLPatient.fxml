@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
+<?import com.lynden.gmapsfx.GoogleMapView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -10,14 +17,17 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="466.0" prefWidth="661.0" stylesheets="@fxmlpatient.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.gestionRefug.Gui.FXMLPatientController">
+<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="975.0" stylesheets="@fxmlpatient.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.gestionRefug.Gui.FXMLPatientController">
    <children>
       <AnchorPane layoutY="5.0" prefHeight="489.0" prefWidth="778.0">
          <children>
-            <TabPane prefHeight="489.0" prefWidth="778.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="592.0" prefWidth="938.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
                <tabs>
                   <Tab text="Consultations">
                      <content>
@@ -44,7 +54,7 @@
                                  </font>
                               </Label>
                               <TextField fx:id="sujet" layoutX="106.0" layoutY="133.0" />
-                              <TableView fx:id="tabRef" layoutX="311.0" layoutY="32.0" onMouseClicked="#modtabref" prefHeight="296.0" prefWidth="373.0">
+                              <TableView fx:id="tabRef" layoutX="311.0" layoutY="60.0" onMouseClicked="#modtabref" prefHeight="352.0" prefWidth="373.0">
                                  <columns>
                                     <TableColumn fx:id="ref" prefWidth="75.0" text="Réfugié" />
                                     <TableColumn fx:id="sujetConslt" prefWidth="75.0" text="Sujet" />
@@ -53,17 +63,20 @@
                                     <TableColumn fx:id="dureeConslt" prefWidth="75.0" text="durée" />
                                  </columns>
                               </TableView>
-                              <Button fx:id="actualiserConsult" layoutX="373.0" layoutY="346.0" mnemonicParsing="false" onAction="#ConsultAfficher" text="Actualiser" />
-                              <Button fx:id="modConsult" layoutX="455.0" layoutY="346.0" mnemonicParsing="false" onAction="#modifierConst" text="Modifier" />
-                              <Button fx:id="suppConsult" layoutX="533.0" layoutY="346.0" mnemonicParsing="false" onAction="#ConsultSupprimer" text="Supprimer" />
+                              <Button fx:id="actualiserConsult" layoutX="371.0" layoutY="431.0" mnemonicParsing="false" onAction="#ConsultAfficher" text="Actualiser" />
+                              <Button fx:id="modConsult" layoutX="479.0" layoutY="431.0" mnemonicParsing="false" onAction="#modifierConst" text="Modifier" />
+                              <Button fx:id="suppConsult" layoutX="567.0" layoutY="431.0" mnemonicParsing="false" onAction="#ConsultSupprimer" text="Supprimer" />
                               <JFXTimePicker fx:id="duree" defaultColor="BLACK" layoutX="95.0" layoutY="379.0" />
                               <TextArea fx:id="contenu" layoutX="86.0" layoutY="180.0" prefHeight="145.0" prefWidth="216.0" />
                               <ComboBox fx:id="listeRefugie" layoutX="106.0" layoutY="82.0" prefWidth="150.0" />
+                              <JFXTextField fx:id="zoneRecher" layoutX="311.0" layoutY="28.0" onKeyTyped="#rechercherConst" prefHeight="25.0" prefWidth="336.0" />
+                              <FontAwesomeIcon iconName="SEARCH" layoutX="653.0" layoutY="47.0" />
+                              <Button layoutX="129.0" layoutY="431.0" mnemonicParsing="false" onAction="#ConsAjout" text="Ajouter" />
                            </children>
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Camps &amp; Refugiés">
+                  <Tab text="Refugiées">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -90,7 +103,7 @@
                               </Label>
                               <TextField fx:id="prenom" layoutX="106.0" layoutY="133.0" />
                               <TextField fx:id="age" layoutX="106.0" layoutY="180.0" />
-                              <TableView fx:id="tabRef1" layoutX="311.0" layoutY="32.0" onMouseClicked="#modifAff" prefHeight="296.0" prefWidth="373.0">
+                              <TableView fx:id="tabRef1" layoutX="304.0" layoutY="66.0" onMouseClicked="#modifAff" prefHeight="296.0" prefWidth="373.0">
                                  <columns>
                                     <TableColumn fx:id="nomref" prefWidth="75.0" text="Nom" />
                                     <TableColumn fx:id="prenomref" prefWidth="75.0" text="Prenom" />
@@ -99,9 +112,9 @@
                                     <TableColumn fx:id="campref" prefWidth="75.0" text="Camp" />
                                  </columns>
                               </TableView>
-                              <Button fx:id="actualiserRef" layoutX="373.0" layoutY="346.0" mnemonicParsing="false" onAction="#refAffiche" text="Actualiser" />
-                              <Button fx:id="modRef" layoutX="455.0" layoutY="346.0" mnemonicParsing="false" onAction="#modifiRef" text="Modifier" />
-                              <Button fx:id="suppRef" layoutX="533.0" layoutY="346.0" mnemonicParsing="false" onAction="#RefSupp" text="Supprimer" />
+                              <Button fx:id="actualiserRef" layoutX="372.0" layoutY="415.0" mnemonicParsing="false" onAction="#refAffiche" text="Actualiser" />
+                              <Button fx:id="modRef" layoutX="460.0" layoutY="415.0" mnemonicParsing="false" onAction="#modifiRef" text="Modifier" />
+                              <Button fx:id="suppRef" layoutX="538.0" layoutY="415.0" mnemonicParsing="false" onAction="#RefSupp" text="Supprimer" />
                               <TextField fx:id="nom" layoutX="106.0" layoutY="82.0" />
                               <TextField fx:id="origine" layoutX="107.0" layoutY="232.0" />
                               <Label fx:id="lbcamp" layoutX="20.0" layoutY="285.0" text="Camp">
@@ -110,22 +123,212 @@
                                  </font>
                               </Label>
                               <ComboBox fx:id="listeCamp" layoutX="107.0" layoutY="285.0" prefWidth="150.0" />
+                              <JFXTextField fx:id="zoneRech" focusColor="#da0000" layoutX="307.0" layoutY="31.0" onKeyTyped="#rechercher" prefHeight="25.0" prefWidth="334.0" unFocusColor="#d00000" />
+                              <FontAwesomeIcon fill="#d70000" iconName="SEARCH" layoutX="651.0" layoutY="53.0" />
                            </children>
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Dons &amp; evenements">
+                  <Tab text=" coordonnées">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="202.0" layoutY="172.0" text="Label" />
+                              <TabPane fx:id="GCord" layoutX="-135.0" prefHeight="594.0" prefWidth="1255.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+                                 <tabs>
+                                    <Tab fx:id="TabAjoutCord" onSelectionChanged="#ajoutercoordo" text="ajouter">
+                                       <content>
+                                          <AnchorPane fx:id="Cord1" minHeight="0.0" minWidth="0.0" prefHeight="566.0" prefWidth="1299.0">
+                                             <children>
+                                                <AnchorPane layoutX="-10.0" layoutY="-7.0" minHeight="0.0" minWidth="0.0" prefHeight="469.0" prefWidth="1043.0">
+                                                   <children>
+                                                      <TableView fx:id="affichCord" layoutX="115.0" layoutY="85.0" prefHeight="320.0" prefWidth="581.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="lieu" prefWidth="75.0" text="lieu" />
+                                                            <TableColumn fx:id="longitude" prefWidth="75.0" text="longitude" />
+                                                            <TableColumn fx:id="latitude" prefWidth="75.0" text="latitude" />
+                                                            <TableColumn fx:id="idCord" prefWidth="75.0" text="id" />
+                                                         </columns>
+                                                      </TableView>
+                                                      <TextField fx:id="searchCord" layoutX="516.0" layoutY="27.0" onAction="#searchCordAction" />
+                                                      <Label layoutX="416.0" layoutY="32.0" text="recherche">
+                                                         <font>
+                                                            <Font name="System Bold Italic" size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Button fx:id="affichCordClick" layoutX="586.0" layoutY="424.0" mnemonicParsing="false" onAction="#affCord" text="actualiser" textFill="#bc0303" />
+                                                      <JFXButton fx:id="addNew" layoutX="149.0" layoutY="363.0" onAction="#addNewAction" prefHeight="140.0" prefWidth="220.0" text="Ajouter un nouveau lieu" textFill="#bc0303">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                    <Tab fx:id="modifCord" onSelectionChanged="#modCord" text="modifier">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="594.0" prefWidth="1185.0">
+                                             <children>
+                                                <Label layoutX="77.0" layoutY="95.0" text="lieu">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="77.0" layoutY="161.0" text="longitude">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="81.0" layoutY="235.0" text="latitiude">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="lieuMod" layoutX="181.0" layoutY="93.0" />
+                                                <TextField fx:id="longMod" layoutX="181.0" layoutY="152.0" />
+                                                <TextField fx:id="latMod" layoutX="181.0" layoutY="233.0" />
+                                                <Button fx:id="modCord" layoutX="228.0" layoutY="301.0" mnemonicParsing="false" onAction="#modifierCord" text="valider" textFill="#bc0303">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <AnchorPane layoutX="392.0" layoutY="-82.0" minHeight="0.0" minWidth="0.0" prefHeight="253.0" prefWidth="296.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                    <Tab fx:id="add" text="add">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="690.0" prefWidth="1178.0">
+                                             <children>
+                                                <TextField fx:id="AjoutLieuC" layoutX="142.0" layoutY="80.0" prefHeight="31.0" prefWidth="172.0" />
+                                                <TextField fx:id="AjoutLong" layoutX="141.0" layoutY="152.0" prefHeight="31.0" prefWidth="176.0" />
+                                                <TextField fx:id="AjoutLat" layoutX="141.0" layoutY="223.0" prefHeight="31.0" prefWidth="173.0" />
+                                                <Label layoutX="68.0" layoutY="82.0" text="lieu">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="60.0" layoutY="154.0" text="longitude">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="58.0" layoutY="228.0" text="latitude">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Button fx:id="AjoutCord" layoutX="184.0" layoutY="282.0" mnemonicParsing="false" onAction="#ajouterCord" text="valider" textFill="#bc0303">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <GoogleMapView fx:id="Map" layoutX="321.0" layoutY="5.0" prefHeight="592.0" prefWidth="817.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                 </tabs>
+                              </TabPane>
                            </children>
                         </AnchorPane>
                      </content>
                   </Tab>
+                  <Tab text="Evenement">
+                     <content>
+                        <AnchorPane id="AnchorPane" fx:id="Eventt" prefHeight="683.0" prefWidth="933.0" stylesheets="@../../gestionEvent/css/bk.css">
+                           <children>
+                              <DatePicker fx:id="labeldate" layoutX="177.0" layoutY="271.0" prefHeight="25.0" prefWidth="164.0" />
+                              <TextField fx:id="labeltitre" layoutX="177.0" layoutY="121.0" prefHeight="25.0" prefWidth="164.0" stylesheets="@../../gestionEvent/css/table.css" />
+                              <TextField fx:id="labelaffiche" layoutX="177.0" layoutY="167.0" prefHeight="25.0" prefWidth="164.0" />
+                              <TextField fx:id="labellieu" layoutX="177.0" layoutY="218.0" prefHeight="25.0" prefWidth="164.0" />
+                              <TextArea fx:id="labeldescription" layoutX="164.0" layoutY="386.0" prefHeight="141.0" prefWidth="177.0" />
+                              <TextField fx:id="labelprix" layoutX="174.0" layoutY="328.0" prefHeight="25.0" prefWidth="171.0" />
+                              <Text layoutX="28.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titre">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="27.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="29.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lieu">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="25.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="29.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="prix">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="28.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="description" wrappingWidth="136.98681640625">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                              <TableView fx:id="table" layoutX="380.0" layoutY="136.0" prefHeight="357.0" prefWidth="460.0">
+                                 <columns>
+                                    <TableColumn fx:id="colotitre" prefWidth="63.0" text="titre" />
+                                    <TableColumn fx:id="coloaffiche" prefWidth="70.0" text="Adresse" />
+                                    <TableColumn fx:id="cololieu" prefWidth="68.0" text="lieu" />
+                                    <TableColumn fx:id="colodate" prefWidth="72.0" text="date" />
+                                    <TableColumn fx:id="coloprix" prefWidth="81.0" text="prix" />
+                                    <TableColumn fx:id="colodescription" prefWidth="105.0" text="description" />
+                                 </columns>
+                                 <stylesheets>
+                                    <URL value="@../../gestionEvent/css/table.css" />
+                                    <URL value="@../../gestionEvent/css/table.css" />
+                                 </stylesheets>
+                              </TableView>
+                              <Button fx:id="ajouter" layoutX="143.0" layoutY="546.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="88.0" stylesheets="@../../gestionEvent/css/style1.css" text="Ajouter" />
+                              <Button fx:id="supprimer" layoutX="323.0" layoutY="546.0" mnemonicParsing="false" onAction="#Supprimer" stylesheets="@../../gestionEvent/css/style.css" text="Supprimer" />
+                              <Button fx:id="modifier" layoutX="462.0" layoutY="546.0" mnemonicParsing="false" onAction="#Modifier" stylesheets="@../../gestionEvent/css/style1.css" text="Modifier" />
+                              <CheckBox fx:id="trier" layoutX="412.0" layoutY="91.0" mnemonicParsing="false" onAction="#trier" text="trier ">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </CheckBox>
+                              <TextField fx:id="recherche" layoutX="583.0" layoutY="88.0" onKeyPressed="#Rch" prefHeight="25.0" prefWidth="177.0" />
+                              <Button fx:id="pdf" layoutX="662.0" layoutY="538.0" mnemonicParsing="false" onAction="#convertirEnPdf" prefHeight="16.0" prefWidth="80.0" text="pdf" />
+                              <ImageView fx:id="image" fitHeight="81.0" fitWidth="80.0" layoutX="4.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../gestionEvent/css/g.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="pdff" fitHeight="76.0" fitWidth="72.0" layoutX="610.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../gestionEvent/css/pdf.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="rech" fitHeight="31.0" fitWidth="61.0" layoutX="539.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../gestionEvent/css/icons8_Search_52px.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="stat" layoutX="630.0" layoutY="35.0" mnemonicParsing="false" onAction="#voirstat" text="Statistique Event" />
+                           </children>
+                        </AnchorPane>
+                     </content></Tab>
+                  <Tab text="Catégorie" />
                </tabs>
             </TabPane>
          </children>
       </AnchorPane>
+      <JFXButton layoutX="822.0" layoutY="-7.0" onAction="#logoutAction" prefHeight="81.0" prefWidth="153.0" text="se déconnecter">
+         <graphic>
+            <FontAwesomeIcon iconName="HEART" />
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="975.0" styleClass="bodyNeeds" stylesheets="@../../../Ressources/styleBackground.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.gestionCamp.GUI.GestionBesoinsController">
+   <children>
+      <TabPane fx:id="GestionBesoin" layoutX="118.0" layoutY="32.0" prefHeight="600.0" prefWidth="1130.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+        <tabs>
+          <Tab fx:id="AjoutBesoin" text="Ajouter Besoin">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="1130.0">
+                     <children>
+                        <TabPane prefHeight="537.0" prefWidth="1130.0" tabClosingPolicy="UNAVAILABLE" />
+                        <ChoiceBox fx:id="ChoiceCamp" layoutX="151.0" layoutY="75.0" prefHeight="31.0" prefWidth="180.0" />
+                        <ChoiceBox fx:id="ChoiceCategorie" layoutX="151.0" layoutY="154.0" prefHeight="31.0" prefWidth="180.0" />
+                        <TextField fx:id="Quantite" layoutX="145.0" layoutY="231.0" />
+                        <Button fx:id="AjouterBS" layoutX="174.0" layoutY="321.0" mnemonicParsing="false" onAction="#AjoutBsButton" text="Valider" textFill="#bc0303">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <Label layoutX="22.0" layoutY="79.0" text="Camp" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font></Label>
+                        <Label layoutX="22.0" layoutY="159.0" text="Besoin" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font></Label>
+                        <Label layoutX="22.0" layoutY="236.0" text="Quantitée" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font></Label>
+                    <AnchorPane layoutX="382.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="611.0">
+                           <children>
+                              <TableView fx:id="AfficherBesoin" layoutX="1.0" layoutY="84.0" prefHeight="302.0" prefWidth="621.0">
+                                <columns>
+                                  <TableColumn fx:id="CampAff" prefWidth="75.0" text="Camp" />
+                                  <TableColumn fx:id="CatAff" prefWidth="75.0" text="Catégorie" />
+                                    <TableColumn fx:id="QuantiteAff" prefWidth="75.0" text="Quantite" />
+                                    <TableColumn fx:id="idB" prefWidth="75.0" text="id" />
+                                </columns>
+                              </TableView>
+                              <TextField fx:id="SearchBs" layoutX="293.0" layoutY="14.0" onAction="#SearchBsAction" />
+                              <Label layoutX="73.0" layoutY="16.0" text="chercher par catégorie" textFill="RED">
+                                 <font>
+                                    <Font name="System Bold Italic" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <Button fx:id="indexAff" layoutX="1008.0" layoutY="314.0" mnemonicParsing="false" onAction="#indexAffAction" text="affectations" textFill="#bc0303">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <Button fx:id="StatA" layoutX="1012.0" layoutY="262.0" mnemonicParsing="false" onAction="#StatAbtn" text="Statistique" textFill="#bc0303">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <Button fx:id="AfficheBesoin" layoutX="1010.0" layoutY="214.0" mnemonicParsing="false" onAction="#AffBs" prefHeight="24.0" prefWidth="92.0" text="actualiser" textFill="#bc0303">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="modifier" text="Modifier">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="QuantMod" layoutX="210.0" layoutY="241.0" />
+                        <ChoiceBox fx:id="CatMod" layoutX="210.0" layoutY="160.0" prefHeight="31.0" prefWidth="186.0" />
+                        <ChoiceBox fx:id="CampMod" layoutX="210.0" layoutY="89.0" prefHeight="31.0" prefWidth="186.0" />
+                        <Button fx:id="Modifier" layoutX="256.0" layoutY="315.0" mnemonicParsing="false" onAction="#ModifBs" text="modifier" textFill="#bc0303">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <Label layoutX="62.0" layoutY="91.0" text="Camp" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="62.0" layoutY="162.0" text="Besoin" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="62.0" layoutY="243.0" text="Quantitée" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="AffecterTab" text="affecter">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="CategorieAffe" layoutX="161.0" layoutY="184.0" />
+                        <TextField fx:id="QuantiteAffe" layoutX="161.0" layoutY="266.0" prefHeight="31.0" prefWidth="180.0" />
+                        <TextField fx:id="LieuAffe" layoutX="161.0" layoutY="109.0" />
+                        <Button fx:id="Affectation" layoutX="201.0" layoutY="327.0" mnemonicParsing="false" onAction="#AffecterButton" text="affecter" textFill="#bc0303">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <Label layoutX="35.0" layoutY="111.0" text="Camp" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="35.0" layoutY="186.0" text="Catégorie" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="35.0" layoutY="268.0" text="Quantitée" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tabStatistiques" text="Statistique">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BarChart fx:id="BarChart" animated="false" layoutX="25.0" layoutY="68.0" prefHeight="354.0" prefWidth="936.0">
+                          <xAxis>
+                            <CategoryAxis fx:id="Xaxis" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="Yaxis" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <ChoiceBox fx:id="ChoiceStat" layoutX="170.0" layoutY="29.0" prefHeight="31.0" prefWidth="199.0" />
+                        <Button fx:id="BtnRetourStat" layoutX="1038.0" layoutY="25.0" mnemonicParsing="false" onAction="#RetourStatAction" text="Retour" textFill="#bc0303">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <Label layoutX="41.0" layoutY="31.0" text="Catégorie" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="AffSuivC" onSelectionChanged="#AffSuivCAction" text="suivie affectation">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableSuivie" layoutX="89.0" layoutY="22.0" prefHeight="391.0" prefWidth="823.0">
+                          <columns>
+                            <TableColumn fx:id="nomCampAff" prefWidth="142.0" text="Camp" />
+                            <TableColumn fx:id="CategorieAff" minWidth="0.0" prefWidth="194.0" text="Catégorie" />
+                              <TableColumn fx:id="quantiteAff" prefWidth="176.0" text="quantité affécté" />
+                              <TableColumn fx:id="dateAff" prefWidth="308.0" text="date" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="RetourAff" layoutX="1038.0" layoutY="14.0" mnemonicParsing="false" onAction="#RetourAffAction" text="Retour" textFill="#bc0303">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <HBox layoutX="-7.0" layoutY="-1.0" prefHeight="79.0" prefWidth="1137.0" style="-fx-background-color: #d9d9d9;">
+         <children>
+            <ButtonBar prefHeight="112.0" prefWidth="249.0">
+               <buttons>
+                  <Label contentDisplay="CENTER" prefHeight="47.0" prefWidth="189.0" text="Maddox" textFill="#d30707">
+                     <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                     </font>
+                  </Label>
+               </buttons>
+            </ButtonBar>
+            <JFXButton fx:id="btnrefgo" onAction="#refugiego" prefHeight="79.0" prefWidth="143.0" text=" Refugies">
+               <graphic>
+                  <FontAwesomeIcon iconName="MALE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnConsultation" onAction="#consultationgo" prefHeight="118.0" prefWidth="138.0" text="Consultation">
+               <graphic>
+                  <FontAwesomeIcon glyphStyleClass="" iconName="PASTE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#InterfaceCamp" prefHeight="112.0" prefWidth="180.0" text="Camp et besoins">
+               <graphic>
+                  <FontAwesomeIcon iconName="ADN" wrappingWidth="10.857142448425293" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#CasSociale" prefHeight="86.0" prefWidth="153.0" text="Cas Sociale">
+               <graphic>
+                  <FontAwesomeIcon iconName="HOME" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="Event" onAction="#EventAction" prefHeight="147.0" prefWidth="145.0" text="Event">
+               <graphic>
+                  <FontAwesomeIcon iconName="MALE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#logoutAction" prefHeight="86.0" prefWidth="153.0" text="se déconnecter">
+               <graphic>
+                  <FontAwesomeIcon iconName="HEART" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

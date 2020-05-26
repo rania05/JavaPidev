@@ -6,14 +6,25 @@
 package proj.gestionRefug.Gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
+import com.nexmo.client.NexmoClient;
+import com.nexmo.client.NexmoClientException;
+import com.nexmo.client.sms.MessageStatus;
+import com.nexmo.client.sms.SmsSubmissionResponse;
+import com.nexmo.client.sms.messages.TextMessage;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,18 +40,24 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.swing.JOptionPane;
 import org.controlsfx.control.Notifications;
 import proj.gestionRefug.entities.RefConsult;
+import proj.gestionRefug.entities.Refugie;
 import proj.gestionRefug.services.ConsultationService;
+import proj.gestionRefug.services.RefugieService;
+import proj.gestionRefug.utils.MyConnection;
 
 /**
  * FXML Controller class
@@ -53,7 +70,7 @@ public class FXMLConsultationController implements Initializable {
     @FXML
     private Button btAjout;
     @FXML
-    private TableView<?> tabRef;
+    private TableView<RefConsult> tabRef;
     @FXML
     private Button actualiserRef;
     @FXML
@@ -96,7 +113,15 @@ public class FXMLConsultationController implements Initializable {
     private JFXButton btnrefugiego;
     @FXML
     private ComboBox<String> listeRefugie;
+    @FXML
+    private JFXTextField zoneRechC;
+    @FXML
+    private Pagination pagination;
   
+    int from = 0, to = 0;
+    int itemPerPage = 5;
+    @FXML
+    private JFXButton Event;
     
     /**
      * Initializes the controller class.
@@ -116,13 +141,38 @@ public class FXMLConsultationController implements Initializable {
         tabRef.setItems(observableList);
           List<String> listeC =Conslt.listeRefugie();
                 ObservableList reffs = FXCollections.observableArrayList(listeC);
-listeRefugie.setValue("liste refugiés");
-listeRefugie.setItems(reffs);
+        listeRefugie.setValue("liste refugiés");
+        listeRefugie.setItems(reffs);
+        int count = 0;
+        String req = "SELECT count(*) FROM Ref_consult";
+        try {
+
+            try (Statement pst1 = MyConnection.getInstance().getCnx().createStatement()) {
+                ResultSet rs1 = pst1.executeQuery(req);
+                rs1.first();
+                count = rs1.getInt(1);
+                rs1.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       colref.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        colsujet.setCellValueFactory(new PropertyValueFactory<>("sujet"));
+        colcontenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
+        coldate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colduree.setCellValueFactory(new PropertyValueFactory<>("duree"));
+       
+
+        int pageCount = (count / itemPerPage) + 1;
+        pagination.setPageCount(pageCount);
+        pagination.setPageFactory(this::createPage);
+
         
     }    
 
     @FXML
-    private void ajoutConsult(ActionEvent event) {
+    private void ajoutConsult(ActionEvent event) throws NexmoClientException, IOException{
         ConsultationService r= new ConsultationService();
             try {
              Time valueOf = java.sql.Time.valueOf(duree.getValue());
@@ -175,10 +225,48 @@ listeRefugie.setItems(reffs);
                 });
     notif.showConfirm();
     }
-   afficheConslt(event);
+    int count = 0;
+        String req = "SELECT count(*) FROM Ref_consult";
+        try {
+
+            try (Statement pst1 = MyConnection.getInstance().getCnx().createStatement()) {
+                ResultSet rs1 = pst1.executeQuery(req);
+                rs1.first();
+                count = rs1.getInt(1);
+                rs1.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       colref.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        colsujet.setCellValueFactory(new PropertyValueFactory<>("sujet"));
+        colcontenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
+        coldate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colduree.setCellValueFactory(new PropertyValueFactory<>("duree"));
+       
+
+        int pageCount = (count / itemPerPage) + 1;
+        pagination.setPageCount(pageCount);
+        pagination.setPageFactory(this::createPage);
+
    clearConslt();
         
-        
+    NexmoClient client = new NexmoClient.Builder()
+                .apiKey("1878f1e9")
+                .apiSecret("7JTSfyTXikC4JZ1A")
+                .build();
+       TextMessage message = new TextMessage("Heart2Hold"," 21623334418",
+        "Bonjour Mr. l'administrateur, A cet instant une consultation est entain de se derouler  ");
+
+    SmsSubmissionResponse response = client.getSmsClient().submitMessage(message);
+
+if (response.getMessages().get(0).getStatus() == MessageStatus.OK) {
+    System.out.println("Message sent successfully.");
+} else {
+    System.out.println("Message failed with error: " + response.getMessages().get(0).getErrorText());
+}
+           
         
     }
 
@@ -199,16 +287,6 @@ listeRefugie.setItems(reffs);
     @FXML
     private void modifConsult(ActionEvent event) {
           ConsultationService b1= new ConsultationService();
-           try {
-             Time valueOf = java.sql.Time.valueOf(duree.getValue());
-            } catch (Exception e) {
-                 Alert alert1 = new Alert(Alert.AlertType.ERROR);
-            alert1.setTitle("Valider duree");
-            alert1.setHeaderText(null);
-            alert1.setContentText("Le champ durée est vide ");
-            alert1.showAndWait();
-
-            }
     if(sujet.getText().isEmpty() || contenu.getText().isEmpty() 
             ){
     Alert alertt=new Alert(Alert.AlertType.ERROR);
@@ -233,7 +311,30 @@ listeRefugie.setItems(reffs);
               sujet.getText(),
               contenu.getText());
          }
-       afficheConslt(event);
+       int count = 0;
+        String req = "SELECT count(*) FROM Ref_consult";
+        try {
+
+            try (Statement pst1 = MyConnection.getInstance().getCnx().createStatement()) {
+                ResultSet rs1 = pst1.executeQuery(req);
+                rs1.first();
+                count = rs1.getInt(1);
+                rs1.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       colref.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        colsujet.setCellValueFactory(new PropertyValueFactory<>("sujet"));
+        colcontenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
+        coldate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colduree.setCellValueFactory(new PropertyValueFactory<>("duree"));
+       
+
+        int pageCount = (count / itemPerPage) + 1;
+        pagination.setPageCount(pageCount);
+        pagination.setPageFactory(this::createPage);
          clearConslt();
     }
 
@@ -252,23 +353,14 @@ listeRefugie.setItems(reffs);
         
          sujet.clear();
          contenu.clear();
-        
-       
-       
         cc=null;
-    
 }
          afficheConslt(event);
          clearConslt();
         
     }
-    
-    
-    
      public void clearConslt()
      {
-         
-        
          sujet.clear();
          contenu.clear();
          
@@ -276,13 +368,11 @@ listeRefugie.setItems(reffs);
 
     @FXML
     private void refugiego(ActionEvent event) throws IOException {
-         ((Node)(event.getSource())).getScene().getWindow().hide();
-        Parent parent = FXMLLoader.load(getClass().getResource("/proj/gestionRefug/Gui/FXMLRefugie.fxml"));
-        Stage stage = new Stage ();
-        Scene scene = new Scene (parent);
-        stage.setScene(scene);
-        stage.setTitle("main");
-        stage.show();
+         Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Désolé");
+            alert1.setHeaderText(null);
+            alert1.setContentText("Vous n'avez pas accèes ");
+            alert1.showAndWait();
     }
 
     @FXML
@@ -307,6 +397,131 @@ listeRefugie.setItems(reffs);
         
         
         
+    }
+
+    private void refreshB() throws SQLException{
+        List<RefConsult> listB=new ArrayList<>();
+        ConsultationService   cr = new ConsultationService();
+        listB = cr.affConsult();
+        ObservableList <RefConsult> data = FXCollections.observableArrayList(listB);
+        tabRef.setItems(data);
+    }
+    
+    
+    @FXML
+    private void rechercherC(KeyEvent event) {
+         ConsultationService ConsultationService = new ConsultationService();
+        zoneRechC.setOnKeyReleased((KeyEvent e)
+                -> {
+            if (zoneRechC.getText().equals("") ) {
+
+                try {
+                    refreshB();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConsultationService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+
+            } else {
+
+                try {
+       colref.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        colsujet.setCellValueFactory(new PropertyValueFactory<>("sujet"));
+        colcontenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
+        coldate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colduree.setCellValueFactory(new PropertyValueFactory<>("duree"));
+                    tabRef.getItems().clear();
+
+                    tabRef.setItems(ConsultationService.rechercheConsultation(zoneRechC.getText()));
+
+                } catch (SQLException ex) {
+                Logger.getLogger(ConsultationService.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
+        
+
+            }
+        }
+        );
+    }
+    
+    public ObservableList<RefConsult> getTableData() {
+        ObservableList<RefConsult> data = FXCollections.observableArrayList();
+        try {
+            String req = "Select r.id,rc.sujet,rc.contenu,rc.date,rc.duree,r.prenom from Ref_consult rc INNER JOIN refugie r on rc.idref=r.id limit "+ from + "," + to;
+            try (Statement pst = MyConnection.getInstance().getCnx().createStatement()) {
+             ResultSet rs = pst.executeQuery(req);
+                while (rs.next()) {
+                    RefConsult r = new RefConsult(
+                      rs.getInt(1),
+                      rs.getString(2),
+                      rs.getString(3),
+                      rs.getDate(4),
+                      rs.getTime(5));                      
+              r.setPrenom(rs.getString(6));
+                  data.add(r);
+                    
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    private Node createPage(int pageIndex) {
+        from = pageIndex * itemPerPage;
+        to = itemPerPage;
+        tabRef.setItems(FXCollections.observableArrayList(getTableData()));
+        return tabRef;
+    }
+
+    @FXML
+    private void dongo(ActionEvent event) throws IOException {
+         Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Désolé");
+            alert1.setHeaderText(null);
+            alert1.setContentText("Vous n'avez pas accèes ");
+            alert1.showAndWait();
+    }
+
+    private void Compte(ActionEvent event) throws IOException {
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+        Parent parent = FXMLLoader.load(getClass().getResource("/proj/gestionUser/GUI/utilisateur.fxml"));
+        Stage stage = new Stage ();
+        Scene scene = new Scene (parent);
+        stage.setScene(scene);
+        stage.setTitle("main");
+        stage.show();
+    }
+
+    @FXML
+    private void CasSociale(ActionEvent event) {
+         Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Désolé");
+            alert1.setHeaderText(null);
+            alert1.setContentText("Vous n'avez pas accèes ");
+            alert1.showAndWait();
+    }
+
+    @FXML
+    private void logoutAction(ActionEvent event) throws IOException {
+          ((Node)(event.getSource())).getScene().getWindow().hide();
+        Parent parent = FXMLLoader.load(getClass().getResource("/proj/gestionUser/GUI/Login.fxml"));
+        Stage stage = new Stage ();
+        Scene scene = new Scene (parent);
+        stage.setScene(scene);
+        stage.setTitle("main");
+        stage.show();
+       
+    }
+
+    @FXML
+    private void EventAction(ActionEvent event) {
+         Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Désolé");
+            alert1.setHeaderText(null);
+            alert1.setContentText("Vous n'avez pas accèes ");
+            alert1.showAndWait();
     }
     
 }

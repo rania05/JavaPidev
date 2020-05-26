@@ -1,0 +1,179 @@
+.parent{
+  
+    -fx-background-color: linear-gradient(to top, #ff7f50, #6a5acd);
+}
+.sidebare{
+    -fx-background-color: linear-gradient(to top,#0055E8, #BBD4FF);
+
+}
+.forgetBtn{
+    -fx-text-fill:#a3a3a3;
+    -fx-underline:true;
+}
+.forgetBtn:hover{
+    -fx-text-fill:#6747CD;
+    -fx-underline:true;
+}
+.loginBtn{
+    -fx-background-color:#1E90Ff;
+    -fx-text-fill:#FFF;
+}
+.loginBtn:hover{
+    -fx-background-color:transparent;
+    -fx-text-fill:#0055E8;
+    -fx-border-color:#cfeaff;
+    -fx-border-width:1px;
+    -fx-border-style:solid;
+
+
+
+}
+.loginBtn:collapsed{
+    -fx-background-color:#FFF;
+    -fx-text-fill:#FFF;
+
+
+}
+.barre{
+    -fx-background-color: linear-gradient(to top,#EDEDED, #CCCCCC);
+}
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {   
+    -fx-background-color: 	#ccbbff;
+    -fx-stroke: transparent;
+    -fx-size:50;
+    -fx-alignment: CENTER ;    
+    -fx-text-alignment: center;
+
+}
+.table-row-cell:filled:hover {
+
+    -fx-size:50;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+
+}
+.table-view:row-selection {
+    -fx-background-color: #B0C4DE;
+    -fx-text-fill: white;
+    -fx-fixed-cell-size: 50;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+
+}
+
+.table-view .table-column{
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER 
+
+}
+
+.bck{
+    -fx-background-color:#F5F5DC;
+
+
+}
+.btns{
+    -fx-background-color: transparent;
+    -fx-text-fill:black;
+}
+.btns:hover{
+    -fx-background-color: #F5F5DC;
+    -fx-text-fill:black;
+}
+
+.addbtn{
+    -fx-background-color: green;
+    -fx-text-fill:#FFF;
+}
+.addbtn:hover{
+    -fx-background-color: #32CD32;
+    -fx-text-fill:#FFF;
+}
+.deletebtn{
+    -fx-background-color: red;
+    -fx-text-fill:#FFF;
+}
+.deletebtn:hover{
+    -fx-background-color: 	#DC143C;
+    -fx-text-fill:#FFF;
+}
+.updatebtn{
+    -fx-background-color: #FF4500;
+    -fx-text-fill:#FFF;
+}
+.updatebtn:hover{
+    -fx-background-color:#FF7F50;
+    -fx-text-fill:#FFF;
+}
+.labeltitre{
+    -fx-text-fill:linear-gradient(to top, #ff7f50, #6a5acd);;
+}
+.pane {
+    -fx-border-color: black;
+    -fx-text-fill:linear-gradient(to top, #ff7f50, #6a5acd);;
+    -fx-background-color: linear-gradient(to top, #ff7f50, #6a5acd);
+
+}
+.pagination{
+	-fx-base:black;	
+}
+.pagination .toggle-button {
+	-fx-shape:"m74.63,72.21494l14.50002,-14.49994l14.49998,14.49994l-14.49998,14.50002l-14.50002,-14.50002z";
+	-fx-background-radius:3px;
+}
+.pagination .button{
+	-fx-padding: 8 10 8 10px;
+	-fx-background-radius:0px; /* This is used for making the Arrow Button Curve*/
+}
+.pagination .label {
+	-fx-text-fill:white;
+}
+.img
+{   
+    -fx-border-radius: 5, 5;
+}
+.gridpane{-fx-background-color: #F5F5DC;
+    -fx-padding: 15;
+    -fx-spacing: 10;}
+
+
+
+
+
+
+
+/*
+.sidebar{
+    -fx-background-color: #333645;
+}
+.btns{
+    -fx-background-color: transparent;
+}
+.btns:hover{
+    -fx-background-color: #202332;
+}
+.box{
+    -fx-border-color: #3B3F4B;
+    -fx-border-width: 1px 0px 0px 0px;
+}
+.round-lbl{
+    -fx-background-color: #FE7A79;
+    -fx-background-radius: 100%;
+}
+.card-01{
+    -fx-background-color: rgba(0, 162, 211,0.3);
+}
+.card-02{
+    -fx-background-color: rgba(69, 183, 175,0.3);
+}
+.card-02{
+    -fx-background-color: rgba(255, 198, 108,0.3);
+}
+.round-box{
+    -fx-background-radius: 100%;
+    -fx-border-radius: 100%;
+    -fx-border-width: 5px;
+}*/

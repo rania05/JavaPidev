@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="519.0" prefWidth="975.0" styleClass="bodyIndex" stylesheets="@../../../Ressources/styleBackground.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.gestionUser.GUI.InscriptionController">
+   <children>
+      <Text fill="#ff0101" layoutX="388.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S'inscrire">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="43.0" />
+         </font>
+      </Text>
+      <Text fill="#ff0101" layoutX="134.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom : " AnchorPane.leftAnchor="134.0">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#ff0101" layoutX="135.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom : " AnchorPane.leftAnchor="135.0">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#ff0101" layoutX="131.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email : " AnchorPane.leftAnchor="131.0">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#ff0101" layoutX="130.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe :" wrappingWidth="164.62109375" AnchorPane.leftAnchor="130.0">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#ff0101" layoutX="130.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmation mot de passe :" AnchorPane.leftAnchor="130.0">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nomUser" layoutX="321.0" layoutY="139.0" prefHeight="26.0" prefWidth="422.0" />
+      <TextField fx:id="prenomUser" layoutX="321.0" layoutY="189.0" prefHeight="26.0" prefWidth="422.0" />
+      <TextField fx:id="emailUser" layoutX="321.0" layoutY="231.0" prefHeight="26.0" prefWidth="422.0" />
+      <TextField fx:id="UserName" layoutX="325.0" layoutY="276.0" prefHeight="31.0" prefWidth="422.0" />
+      <PasswordField fx:id="mdpUser" layoutX="325.0" layoutY="368.0" prefHeight="31.0" prefWidth="422.0" />
+      <PasswordField fx:id="confirmationMdpUser" layoutX="374.0" layoutY="417.0" prefHeight="31.0" prefWidth="369.0" />
+      <Button fx:id="btnAddUser" layoutX="388.0" layoutY="467.0" mnemonicParsing="false" onAction="#addUser" prefHeight="31.0" prefWidth="120.0" style="-fx-background-color: #ff0101;" text="Confirmer" textFill="#fcfafa">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="567.0" layoutY="468.0" mnemonicParsing="false" onAction="#goToLogin" prefHeight="39.0" prefWidth="124.0" style="-fx-background-color: #ff0101;" text="Annuler" textFill="#f5f4f4">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Button>
+      <Text fx:id="txtPhotoUser" fill="#ff0101" layoutX="130.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="120.00000374391675">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="comboRole" editable="true" layoutX="327.0" layoutY="319.0" prefHeight="31.0" prefWidth="422.0" style="-fx-background-color: #ff0101;" />
+      <Label layoutX="131.0" layoutY="326.0" text="Role :" textFill="#ff0101" AnchorPane.leftAnchor="131.0">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

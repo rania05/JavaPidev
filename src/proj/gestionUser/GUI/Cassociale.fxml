@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="975.0" styleClass="bodyCas" stylesheets="@../../../Ressources/styleBackground.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.gestionUser.GUI.CassocialeController">
+   <children>
+      <TabPane fx:id="tabCS" layoutX="-4.0" layoutY="45.0" prefHeight="530.0" prefWidth="1036.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="listeCas" text="Liste des cas">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="900.0">
+                     <children>
+                        <TableView fx:id="table" layoutX="355.0" layoutY="93.0" prefHeight="350.0" prefWidth="516.0">
+                          <columns>
+                            <TableColumn fx:id="clLieu" prefWidth="153.0" text="Lieu" />
+                            <TableColumn fx:id="clDate" prefWidth="244.0" text="Date" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="txtLieu" layoutX="130.0" layoutY="139.0" prefHeight="25.0" prefWidth="120.0" />
+                        <DatePicker fx:id="txtDate" layoutX="130.0" layoutY="205.0" prefHeight="25.0" prefWidth="132.0" />
+                        <Label layoutX="34.0" layoutY="141.0" prefHeight="27.0" prefWidth="79.0" text="adresse" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="19.0" />
+                           </font></Label>
+                        <Label layoutX="43.0" layoutY="207.0" prefHeight="27.0" prefWidth="44.0" text="Date" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font></Label>
+                        <Button fx:id="btn" layoutX="157.0" layoutY="268.0" mnemonicParsing="false" onAction="#Modifier" text="Modifier" textFill="RED" />
+                        <Button fx:id="suppr" layoutX="888.0" layoutY="269.0" mnemonicParsing="false" onAction="#validerSuppr" prefHeight="30.0" prefWidth="118.0" text="Supprimer" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <Button fx:id="vider" layoutX="892.0" layoutY="327.0" mnemonicParsing="false" onAction="#Clear" prefHeight="30.0" prefWidth="118.0" text="Vider" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <TextField fx:id="recherche" layoutX="596.0" layoutY="37.0" onAction="#recher" prefHeight="31.0" prefWidth="163.0" />
+                        <Label layoutX="425.0" layoutY="37.0" text="Rechercher" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font></Label>
+                        <Button layoutX="888.0" layoutY="206.0" mnemonicParsing="false" onAction="#ajouterCas" text="Ajouter un cas" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="ajoutTab" text="Ajouter un cas">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <DatePicker fx:id="dateCas" layoutX="180.0" layoutY="147.0" promptText="date" />
+                        <Label layoutX="113.0" layoutY="152.0" prefHeight="17.0" prefWidth="51.0" text="Date" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="20.0" />
+                           </font></Label>
+                        <Label layoutX="111.0" layoutY="92.0" prefHeight="17.0" prefWidth="40.0" text="Lieu" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="20.0" />
+                           </font></Label>
+                        <Button layoutX="194.0" layoutY="236.0" mnemonicParsing="false" onAction="#addCas" text="Valdier" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <Button layoutX="295.0" layoutY="236.0" mnemonicParsing="false" onAction="#ClearAdd" text="Annuler" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <TextField fx:id="LieuCas" layoutX="180.0" layoutY="87.0" promptText="lieu" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <HBox layoutX="-3.0" layoutY="-1.0" prefHeight="94.0" prefWidth="1036.0" style="-fx-background-color: #d9d9d9;">
+         <children>
+            <ButtonBar prefHeight="100.0" prefWidth="139.0">
+               <buttons>
+                  <Label prefHeight="47.0" prefWidth="105.0" text="Maddox" textFill="#d30707">
+                     <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                     </font>
+                  </Label>
+               </buttons>
+            </ButtonBar>
+            <JFXButton fx:id="refId" onAction="#refugiego" prefHeight="119.0" prefWidth="141.0" text=" Refugies">
+               <graphic>
+                  <FontAwesomeIcon iconName="MALE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="consid" onAction="#consultationgo" prefHeight="118.0" prefWidth="138.0" text="Consultation">
+               <graphic>
+                  <FontAwesomeIcon glyphStyleClass="" iconName="PASTE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="cmpid" onAction="#InterfaceCamp" prefHeight="121.0" prefWidth="163.0" text="Camp et besoins">
+               <graphic>
+                  <FontAwesomeIcon iconName="ADN" wrappingWidth="10.857142448425293" />
+               </graphic></JFXButton>
+            <JFXButton fx:id="csid" onAction="#CasSociale" prefHeight="147.0" prefWidth="145.0" text="Cas Sociale">
+               <graphic>
+                  <FontAwesomeIcon iconName="HOME" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="Event" onAction="#EventAction" prefHeight="147.0" prefWidth="145.0" text="Event">
+               <graphic>
+                  <FontAwesomeIcon iconName="MALE" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#logoutAction" prefHeight="100.0" prefWidth="153.0" text="se déconnecter">
+               <graphic>
+                  <FontAwesomeIcon iconName="HEART" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

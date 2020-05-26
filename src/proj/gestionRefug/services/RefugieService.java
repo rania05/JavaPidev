@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import proj.gestionRefug.entities.Refugie;
 import proj.gestionRefug.utils.MyConnection;
 
@@ -54,7 +56,7 @@ public class RefugieService {
 String ch="";
          try {
             Statement st=cnx.createStatement();
-            String req="Select nomCamp from camps";
+            String req="Select nom from camp";
             ResultSet rs = st.executeQuery(req);
             while(rs.next()){
              ch=rs.getString(1); 
@@ -72,7 +74,7 @@ String ch="";
    int x=0;
          try {
             Statement st=cnx.createStatement();
-            String req="Select idCamp from camps where nomCamp ='"+nom+"'";
+            String req="Select id from camp where nom ='"+nom+"'";
             ResultSet rs = st.executeQuery(req);
             while(rs.next()){
              x=rs.getInt(1); 
@@ -105,7 +107,7 @@ String ch="";
     {String x="";
          try {
             Statement st=cnx.createStatement();
-            String req="Select nomCamp from camps where idCamp ='"+id+"'";
+            String req="Select nom from camp where id ='"+id+"'";
             ResultSet rs = st.executeQuery(req);
             while(rs.next()){
              x=rs.getString(1); 
@@ -123,7 +125,7 @@ String ch="";
 
          try {
             Statement st=cnx.createStatement();
-            String req="Select r.nom,r.prenom,r.age,r.origine,c.idcamp,c.nomCamp from refugie r INNER JOIN camps c on r.idcamp = c.idCamp ";
+            String req="Select r.nom,r.prenom,r.age,r.origine,c.id,c.nom from refugie r INNER JOIN camp c on r.idcamp = c.id ";
             ResultSet rs = st.executeQuery(req);
             while(rs.next()){
               Refugie r = new Refugie(
@@ -141,6 +143,33 @@ String ch="";
        return list ;
          
      }
+     
+     public ObservableList<Refugie> rechercheRefugie(String recherche) throws SQLException {
+        ObservableList<Refugie> list = FXCollections.observableArrayList();
+        String requete = "Select r.nom,r.prenom,r.age,r.origine,c.id,c.nom from refugie r INNER JOIN camp c on r.idcamp = c.id WHERE nom LIKE '%"+recherche+"%' OR age LIKE '%"+recherche+"%' OR prenom LIKE '%"+recherche+"%' Or origine LIKE '%"+recherche+"%' or c.nom LIKE '%"+recherche+"%' ";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(requete);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Refugie p = new Refugie(
+                    rs.getString(1),
+                      rs.getString(2),
+                      rs.getInt(3),
+                      rs.getString(4),
+                      rs.getInt(5));
+                      p.setNomCamp(rs.getString(6));
+
+            list.add(p);          
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return list;
+    }
+        
+     
+     
     public  void supprimerRefugie(String nom){
         
         try {

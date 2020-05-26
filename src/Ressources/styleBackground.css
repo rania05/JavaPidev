@@ -4,3 +4,21 @@
 .bodydoctor{
     -fx-background-image: url("/Ressources/6.jpg"); 
 }
+.bodyCamps{
+    -fx-background-image: url("/Ressources/camps.jpg"); 
+}
+.bodyNeeds{
+    -fx-background-image: url("/Ressources/needs.jpg"); 
+}
+.bodyIndex{
+    -fx-background-image: url("/Ressources/tt.jpg"); 
+}
+.bodyCas{
+    -fx-background-image: url("/Ressources/cassociale.jpg"); 
+}
+.bodyHelp{
+    -fx-background-image: url("/Ressources/help.png"); 
+}
+.bodyback{
+    -fx-background-image: url("/Ressources/bk.jpg"); 
+}
